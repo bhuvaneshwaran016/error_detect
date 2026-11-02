@@ -23,16 +23,18 @@ class Inventory:
             raise InventoryError(f"unknown SKU: {sku}") from None
 
     def reserve(self, sku: str, quantity: int) -> None:
+        if quantity <= 0:
+            raise InventoryError("quantity must be positive")
         product = self.get(sku)
-        if quantity < 0:
-            raise InventoryError("quantity cannot be negative")
         if product.stock < quantity:
             raise InventoryError("insufficient stock")
         product.stock -= quantity
 
     def release(self, sku: str, quantity: int) -> None:
+        if quantity <= 0:
+            raise InventoryError("quantity must be positive")
         product = self.get(sku)
-        product.stock -= quantity
+        product.stock += quantity
 
     def all_products(self) -> list[Product]:
         return list(self._products.values())

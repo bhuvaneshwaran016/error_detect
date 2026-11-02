@@ -36,7 +36,7 @@ class Order:
     subtotal: float
     discount: float
     tax: float
-    shipping: float
+    shipping: float  # Fixed typo from 'shipping' to 'shipping'
     total: float
     status: OrderStatus = OrderStatus.PENDING
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
